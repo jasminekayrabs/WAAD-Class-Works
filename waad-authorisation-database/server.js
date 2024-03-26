@@ -1,0 +1,16 @@
+require('dotenv').config();
+ const express = require('express');
+ const app = express();
+ const api = require('./api.js')
+ const authorize = require('./authorize.js');
+ const login = require('./login.js'); 
+ app.get('/', (req, res) => {
+    res.send('Welcome to the API');
+  });
+ app.use(express.json());
+ app.use('/login', login);
+ app.use('/api', authorize, api);
+ app.listen(process.env.PORT, () => {
+     console.log("Server is listening on port %s", process.env.PORT);
+});
+
